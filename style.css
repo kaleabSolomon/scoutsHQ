@@ -92,3 +92,21 @@ button:hover {
   font-size: 16px;
   line-height: 1.5;
 }
+@media screen and (max-width: 600px) {
+  /* Adjust the search box width for smaller screens */
+  input[type="text"] {
+    width: 100%;
+  }
+  .search-container {
+    flex-direction: column;
+  }
+
+  /* Adjust the font size of the search results for smaller screens */
+  .result-item h3 {
+    font-size: 20px;
+  }
+
+  .result-item p {
+    font-size: 14px;
+  }
+}
