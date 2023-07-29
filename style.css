@@ -1,0 +1,56 @@
+body {
+  height: 100vh;
+  background-image: url("aot.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 50px;
+  color: #fff;
+}
+h1 {
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.search-container {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 30px;
+  align-items: center;
+}
+
+/* Add styling for the search box */
+
+input[type="text"] {
+  color: white;
+  padding: 10px;
+  width: 300px;
+  font-size: 16px;
+  height: 30px;
+  border-radius: 30px;
+  border: 2px solid white;
+  outline: none;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+input[type="text"]::placeholder {
+  color: white;
+}
+button {
+  height: 40px;
+  padding: 0 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  background-color: rgba(118, 0, 0, 0.5);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #cc0000;
+}
