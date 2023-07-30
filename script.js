@@ -1,24 +1,35 @@
-function search() {
-  var searchQuery = document.getElementById("searchInput").value;
+const resultsContainer = document.getElementById("results");
 
-  // For demonstration purposes, let's assume we have a sample response
-  var response = [
-    { title: "Attack on Titan Season 1", summary: "Summary of Season 1" },
-    { title: "Attack on Titan Season 2", summary: "Summary of Season 2" },
-    { title: "Attack on Titan Season 3", summary: "Summary of Season 3" },
-  ];
+async function search(page = 1) {
+  const searchQuery = document.getElementById("searchInput").value;
+  const generalResponse = await fetch(
+    `https://api.attackontitanapi.com/characters?page=${page}`
+  );
+  const generalData = await generalResponse.json();
+  console.log(generalData);
+  const results = generalData.results;
+  console.log(results);
 
-  var resultsContainer = document.getElementById("results");
-  resultsContainer.innerHTML = ""; // Clear previous results
-
-  // Display the results
-  response.forEach(function (item) {
-    var resultItem = document.createElement("div");
-    resultItem.classList.add("result-item");
-    resultItem.innerHTML =
-      "<h3>" + item.title + "</h3><p>" + item.summary + "</p>";
-    resultsContainer.appendChild(resultItem);
-  });
-
-  getData();
+  // Clear previous results
+  resultsContainer.innerHTML = "";
+  const resultItem = document.createElement("div");
+  resultItem.classList.add("result-item");
+  let resultFound = false;
+  for (value of results) {
+    if (searchQuery == value.name) {
+      resultItem.innerHTML = `<p>${value.name}</p>`;
+      resultsContainer.appendChild(resultItem);
+      resultFound = true;
+      break;
+    }
+  }
+  if (resultFound == false) {
+    if (generalData.info.next_page) {
+      search(page + 1);
+    } else {
+      resultItem.innerHTML = `<p>No characters found</p>`;
+      resultsContainer.appendChild(resultItem);
+    }
+  }
+  // // Display the results
 }
