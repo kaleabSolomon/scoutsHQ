@@ -1,10 +1,11 @@
 import Fuse from "fuse.js";
 const resultsContainer = document.getElementById("results");
 const searchBtn = document.getElementById("search");
-const searchResult = [];
+let searchResult = [];
 
 searchBtn.addEventListener("click", (event) => {
   event.preventDefault();
+  searchResult = [];
   search();
 });
 async function search(page = 1) {
@@ -22,8 +23,6 @@ async function search(page = 1) {
 
   // Clear previous results
   resultsContainer.innerHTML = "";
-  const resultItem = document.createElement("div");
-  resultItem.classList.add("result-item");
 
   // Create a new Fuse instance with your dataset and desired options
   const fuse = new Fuse(results, {
@@ -32,12 +31,26 @@ async function search(page = 1) {
   });
 
   const result = fuse.search(searchQuery);
+
   for (let item of result) {
     searchResult.push(item);
   }
+  console.log(searchResult);
   if (generalData.info.next_page) {
     search(page + 1);
   }
 
-  console.log(searchResult);
+  if (searchResult.length == 0 && generalData.next_page == null) {
+    let resultItem = document.createElement("div");
+    resultItem.classList.add("result-item");
+    resultItem.innerHTML = "<h3>no results found</h3>";
+    resultsContainer.appendChild(resultItem);
+  } else {
+    searchResult.forEach(function (item) {
+      let resultItem = document.createElement("div");
+      resultItem.classList.add("result-item");
+      resultItem.innerHTML = "<h3>" + item.item.name + "</h3>";
+      resultsContainer.appendChild(resultItem);
+    });
+  }
 }
