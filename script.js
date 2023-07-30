@@ -1,7 +1,10 @@
 const resultsContainer = document.getElementById("results");
 
 async function search(page = 1) {
-  const searchQuery = document.getElementById("searchInput").value;
+  const searchQuery = document
+    .getElementById("searchInput")
+    .value?.toLowerCase();
+  console.log(searchQuery);
   const generalResponse = await fetch(
     `https://api.attackontitanapi.com/characters?page=${page}`
   );
@@ -16,7 +19,8 @@ async function search(page = 1) {
   resultItem.classList.add("result-item");
   let resultFound = false;
   for (value of results) {
-    if (searchQuery == value.name) {
+    if (searchQuery == value.name.toLowerCase()) {
+      console.log(value.name.toLowerCase());
       resultItem.innerHTML = `<p>${value.name}</p>`;
       resultsContainer.appendChild(resultItem);
       resultFound = true;
