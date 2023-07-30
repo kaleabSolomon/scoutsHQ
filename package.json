@@ -18,5 +18,8 @@
   "homepage": "https://github.com/kaleabSolomon/aot-google#readme",
   "dependencies": {
     "fuse.js": "^6.6.2"
+  },
+  "devDependencies": {
+    "vite": "^4.4.7"
   }
 }

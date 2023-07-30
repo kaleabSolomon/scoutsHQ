@@ -1,5 +1,10 @@
+import Fuse from "fuse.js";
 const resultsContainer = document.getElementById("results");
-
+const searchBtn = document.getElementById("search");
+searchBtn.addEventListener("click", (event) => {
+  event.preventDefault();
+  search();
+});
 async function search(page = 1) {
   const searchQuery = document
     .getElementById("searchInput")
@@ -10,7 +15,7 @@ async function search(page = 1) {
   );
   const generalData = await generalResponse.json();
   console.log(generalData);
-  const results = generalData.results;
+  const results = Object.values(generalData.results);
   console.log(results);
 
   // Clear previous results
@@ -18,7 +23,7 @@ async function search(page = 1) {
   const resultItem = document.createElement("div");
   resultItem.classList.add("result-item");
   let resultFound = false;
-  for (value of results) {
+  for (let value of results) {
     if (searchQuery == value.name.toLowerCase()) {
       console.log(value.name.toLowerCase());
       resultItem.innerHTML = `<p>${value.name}</p>`;
