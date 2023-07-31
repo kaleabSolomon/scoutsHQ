@@ -1,7 +1,7 @@
 {
   "name": "aot-proj",
   "version": "1.0.0",
-  "description": "find out about characters by searching their name",
+  "description": "find out about Attack on Titan characters by searching their name",
   "main": "script.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
