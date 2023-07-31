@@ -40,17 +40,47 @@ async function search(page = 1) {
     search(page + 1);
   }
 
-  if (searchResult.length == 0 && generalData.next_page == null) {
+  if (searchResult.length == 0 && generalData.info.next_page == null) {
     let resultItem = document.createElement("div");
     resultItem.classList.add("result-item");
     resultItem.innerHTML = "<h3>no results found</h3>";
     resultsContainer.appendChild(resultItem);
   } else {
-    searchResult.forEach(function (item) {
-      let resultItem = document.createElement("div");
-      resultItem.classList.add("result-item");
-      resultItem.innerHTML = "<h3>" + item.item.name + "</h3>";
-      resultsContainer.appendChild(resultItem);
+    searchResult.forEach(function (value) {
+      let alias =
+        value.item.alias.length > 0
+          ? `<b>Alias: </b> ${value.item.alias[0]}`
+          : "";
+      // let resultItem = document.createElement("div");
+      // resultItem.classList.add("result-item");
+      // resultItem.innerHTML = "<h3>" + item.item.name + "</h3>";
+      // resultsContainer.appendChild(resultItem);
+      let results = `<div class="result">
+      <img src="assets/tempLogo.jpg" alt="character image" />
+
+      <div class="data">
+       
+          <div class="name">${value.item.name}</div>
+          <div class="alias">${alias}</div>
+        
+        <div class="status"><b>Status: </b> ${value.item.status}</div>
+        <div class="ageSex">
+          <div class="age"><b>Age: </b>${value.item?.age}</div>
+          <div class="sex"><b>Sex: </b>${value.item?.gender}</div>
+        </div>
+        <div class="residence"><b>Residence: </b>${value.item?.residence}</div>
+      </div>
+    </div>`;
+      resultsContainer.insertAdjacentHTML("beforeend", results);
+      // let resultContainer = document.createElement("div");
+      // resultContainer.classList.add("result");
+      // let charImg = document.createElement("img");
+      // charImg.src = "assets/tempLogo.jpg";
+      // charImg.alt = "Character Image";
+      // let dataContainer = document.createElement("div");
+      // dataContainer.classList.add("data");
+      // let namesContainer = document.createElement("div");
+      // namesContainer.classList.add("names");
     });
   }
 }
